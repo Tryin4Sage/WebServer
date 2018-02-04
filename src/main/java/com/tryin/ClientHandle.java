@@ -3,8 +3,10 @@ package com.tryin;
 import java.io.File;
 import java.net.Socket;
 
-import com.tryin.http.HTTPRequest;
-import com.tryin.http.HTTPResponse;
+import com.tryin.context.HttpContext;
+import com.tryin.http.EmptyRequestException;
+import com.tryin.http.HttpRequest;
+import com.tryin.http.HttpRsponse;
 
 /**
  * 
@@ -22,15 +24,26 @@ public class ClientHandle implements Runnable{
 	public void run() {
 		try {
 			//解析请求信息
-			HTTPRequest request = new HTTPRequest(socket.getInputStream());	
+			HttpRequest request = new HttpRequest(socket.getInputStream());	
 			//创建响应对象
-			HTTPResponse response = new HTTPResponse(socket.getOutputStream());
+			HttpRsponse response = new HttpRsponse(socket.getOutputStream());
 			
 			File file = new File("webapps"+request.getUrl());
+			System.err.println(file);
 			if (file.exists()) {
+				System.err.println("------------");
+				String name = file.getName();
+				String extension = name.substring(name.lastIndexOf(".")+1);
+				String contentType = HttpContext.getMimeType(extension);
+				
+				response.setContentType(contentType);
+				response.setContentLength(file.length());
+				
 				response.setEntity(file);
 				response.flush();
 			}
+		} catch (EmptyRequestException e) {
+			System.out.println(e.getMessage());
 		} catch (Exception e) {
 			System.err.println("响应期间离奇异常");
 		} finally {
@@ -40,8 +53,5 @@ public class ClientHandle implements Runnable{
 				System.err.println("关闭异常");
 			}
 		}
-		
-		
 	}
-
 }

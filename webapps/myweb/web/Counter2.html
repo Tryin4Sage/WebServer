@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>浪子毒姬</title>
+<script type="text/javascript">
+	function cal(e) {
+		var obj = e.srcElement || e.target;
+		if (obj.nodeName != "INPUT") { return; }
+		//if (obj.nodeName != "DIV") { return; }
+		
+		var v = obj.value;
+		//alert(v);
+		
+		var p = document.getElementById("screen");
+		if (v == "c") {
+			p.innerHTML = "";
+		} else if (v == "="){
+			var exp = p.innerHTML;
+			try {
+				var result = eval("("+exp+")");
+				p.innerHTML = result;
+			} catch (e) {
+			}
+		} else {
+			p.innerHTML += v;
+		}
+	}
+</script>
+<style type="text/css">
+.panel{
+	border: 3px solid #ccc;
+	width: 200px; height: 250px;
+	margin: 0 auto; border-radius:5px;
+}
+.panel p,.panel input{
+	font-family: 微软雅黑; font-size: 20px; margin: 4px;
+	float: left; border-radius:5px; 
+}
+.panel p{
+	width:140px; height: 40px;
+	border: 1px solid #ccc;
+	overflow: hidden;
+}
+.panel input{
+	width: 42px; height: 42px;
+}
+</style>
+</head>
+<body>
+
+	<div class="panel" onclick="cal(event);">
+		<div>
+			<p id="screen"></p>
+			<input type="button" value="c">
+		</div>
+		<div>
+			<input type="button" value="7">
+			<input type="button" value="8">
+			<input type="button" value="9">
+			<input type="button" value="/">
+			<br>
+			<input type="button" value="4">
+			<input type="button" value="5">
+			<input type="button" value="6">
+			<input type="button" value="*">
+			<br>
+			<input type="button" value="1">
+			<input type="button" value="2">
+			<input type="button" value="3">
+			<input type="button" value="-">
+			<br>
+			<input type="button" value="0">
+			<input type="button" value=".">
+			<input type="button" value="=">
+			<input type="button" value="+">
+			<br>
+		</div>
+	</div>
+
+</body>
+</html>

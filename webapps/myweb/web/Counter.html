@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>counter</title>
+<script type="text/javascript">
+var num = "";
+function dj(a) {
+	
+	var sz = document.getElementById("xs");
+	console.log("dain");
+	if(num){
+		sz.value = num + a;
+		console.log("1");
+	}else {
+		sz.value = a;
+		console.log("2");
+	}
+	num +=a;
+}
+function cal() {
+	var input = document.getElementById("xs").value;
+	try {
+		var value = eval(input);
+		document.getElementById("xs").value = value;
+	} catch (e) {
+		document.getElementById("xs").value = "error";
+	}
+	num = "";
+}
+</script>
+
+<style type="text/css">
+input{
+	width: 50px; height: 50px; border: 2px solid gray;
+	font-size: 36px; margin: 5px 2px;
+}
+</style>
+</head>
+<body>
+	<div align="center">
+		<div style="width:250px; height:330px; border: 2px solid gray; ">
+			<input id="xs" style="width:236px; height:50px; border: 2px solid gray; 
+				font-size: 26px; text-align: right;"><br>
+				<b>这是一个神奇的计算器</b><br>
+			<input type="button" value="0" onclick="dj('0');">
+			<input type="button" value="/" onclick="dj('/');">
+			<input type="button" value="*" onclick="dj('*');">
+			<input type="button" value="-" onclick="dj('-');"><br>
+			<input type="button" value="7" onclick="dj('7');">
+			<input type="button" value="8" onclick="dj('8');">
+			<input type="button" value="9" onclick="dj('9');">
+			<input type="button" value="+" onclick="dj('+');"><br>
+			<input type="button" value="4" onclick="dj('4');">
+			<input type="button" value="5" onclick="dj('5');">
+			<input type="button" value="6" onclick="dj('6');">
+			<input type="button" value="." onclick="dj('.');"><br>
+			<input type="button" value="1" onclick="dj('1');">
+			<input type="button" value="2" onclick="dj('2');">
+			<input type="button" value="3" onclick="dj('3');">
+			<input type="button" value="=" onclick="cal();"><br>
+			
+		</div>
+	</div>
+</body>
+</html>

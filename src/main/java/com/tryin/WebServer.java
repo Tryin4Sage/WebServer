@@ -20,7 +20,7 @@ public class WebServer {
 	public WebServer() {
 		try {
 			server = new ServerSocket(8088);
-			System.out.println("服务器1.0已启动");
+			System.out.println("服务器2.0已启动");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,7 +39,7 @@ public class WebServer {
 				System.err.println(socket.getInetAddress());
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.err.println("坑呢,连接异常了");
 		}
 	}
 	

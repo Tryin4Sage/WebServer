@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>See</title>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(this).mousemove(function(e){
+		$("#d1").css("top",e.pageY-100);
+		$("#d1").css("left",e.pageX-100);
+		$("img").css("top",80-e.pageY);
+		$("img").css("left",0-e.pageX);
+	})
+});
+</script>
+<style type="text/css">
+#d1{
+	width: 200px; height: 200px; border-radius: 100px;
+	border: 2px solid orange; position: relative; z-index: 9;
+	overflow: hidden; top: 0px; left: 0px;
+}
+img{
+	position: absolute;
+}
+</style>
+</head>
+<body>
+	<div id="d1">
+		<img src="../img/bu5.jpg" width="1300">
+	</div>
+</body>
+</html>

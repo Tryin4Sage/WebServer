@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>蔚三拳</title>
+<link rel="stylesheet" type="text/css" href="../css/index.css">
+<script type="text/javascript">
+	function to() {
+		var flag = window.prompt("你的目的地是哪里?");
+		if (flag ==="达内") {
+			location.href = "http//:www.anye.com";
+			console.log(flag);
+			location.reload();
+		} else{
+			location.href = "http//:www.xxxx.com";
+			console.log(flag);
+		}
+	}
+</script>
+</head>
+<body>
+	<header></header>
+	
+	<div class="container" align="center">
+		<img id="id" src="../img/1.png" width="400">
+		
+		<div id="login"><form action="#">
+			<div id="gps">
+				<input type="text" placeholder="请在四下无人的时候输入口令">
+				<input type="password" placeholder=" 密令只有一次机会  - 请自重">
+			</div>
+				<input id="sub" type="button" value="KO" onclick="to()">
+		</form></div>
+		
+	</div>
+	
+	<footer></footer>
+</body>
+</html>

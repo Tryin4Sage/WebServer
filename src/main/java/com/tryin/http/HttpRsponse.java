@@ -4,24 +4,36 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import com.tryin.context.HttpContext;
 /**
  * 
  * @TODO 发送请求数据
  * @author Tryin4Sage
  * @date 2018年2月3日下午5:22:19
  */
-public class HTTPResponse {
+public class HttpRsponse {
 	private OutputStream out;
 	private File  entity;
+	//响应消息头
+	private Map<String,String> headers = new HashMap<String,String>();
 	public File getEntity() {
 		return entity;
 	}
 	public void setEntity(File entity) {
 		this.entity = entity;
 	}
-	
-	public HTTPResponse(OutputStream out) {
+	public HttpRsponse(OutputStream out) {
 		this.out = out;
+	}
+	public void setContentType(String contentType) {
+		this.headers.put(HttpContext.HEADER_CONTENT_TYPE, contentType);
+	}
+	public void setContentLength(long length) {
+		this.headers.put(HttpContext.HEADER_CONTENT_TYPE, length+"");
 	}
 	/*
 	 * 回复客户端
@@ -50,13 +62,11 @@ public class HTTPResponse {
 	private void sendHeaders() {
 		System.out.println("HttpResponse:发送响应头");
 		try {
-			String line = "Content-Type:text/html";
-			System.out.println("header:"+line);
-			println(line);
-			
-			line = "Content-Length:"+entity.length();
-			System.out.println("header:"+line);
-			println(line);
+			for(Entry<String,String> e : headers.entrySet()) {
+				String line = e.getKey()+":"+e.getValue();
+				System.out.println("header:"+line);
+				println(line);
+			}
 			//单独发送CRLF
 			println("");
 		} catch (Exception e) {
@@ -86,8 +96,8 @@ public class HTTPResponse {
 	private void println(String line) {
 		try {
 			out.write(line.getBytes("ISO8859-1"));
-			out.write(13);
-			out.write(10);
+			out.write(HttpContext.CR);
+			out.write(HttpContext.LF);
 		} catch (Exception e) {
 			System.err.println("发送数据异常");
 		}

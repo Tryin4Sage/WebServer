@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+body,h1,h2,h3,h4,h5,h6,img,div,ul,li,ol,p,a{
+	margin: 0px; padding: 0px;
+	font-family: 微软雅黑;
+}
+	
+body{
+	background-color: #461548;
+}
+.container{
+	width: 1180px; height: 680px;
+	border-radius: 5px 400px 5px 200px;
+	background-image: url("../img/Vi_Splash_1.jpg");
+	margin: 0 auto;
+	position: relative;
+}
+#login{
+	width: 200px; height: 280px;
+	border-radius:45px 0px;
+	background-color: rgba(5,3,0,0.2);
+	border: 6px double #fccda7;
+	position: relative;
+	right: 250px;top: 300px;
+	box-shadow: 10px 10px 5px rgba(250,200,150,0.4);
+}
+#gps{
+	width: 180px; height: 150px;
+	border: 3px double #9de1f0;
+	margin-top: 30px;
+}
+#gps input{
+	width: 170px;height: 26px;
+	border: 5px 12px;
+	margin-top: 24px;
+	border-radius:5px;
+	background-color: rgba(66,120,92,0.1);
+	text-shadow: 5px 5px 5px #FF0000;
+}
+#sub{
+	width: 60px;height: 60px;text-shadow:3px 3px 3px #000000;
+	border-radius:40px;font-size:1.6em;color:#f7a757;
+	border:5px white dashed;
+	background: -webkit-linear-gradient(top,#27b0f6 0%, #13ffff 100%);
+	position: relative;
+	top: 20px;
+}
+#id{
+	float: left;margin-left: 100px;
+}
+
+
+
+
+
+
+
