@@ -1,0 +1,65 @@
+HTTP协议:超文本传输协议
+该协议是应用层协议.用来规定浏览器与服务端传输数据的格式.
+
+HTTP协议分为两大部分:
+1:请求协议 request
+2:响应协议 response
+
+请求:客户端发送给服务端的内容为请求.
+响应:服务端回馈客户端的内容为响应.
+
+HTTP协议要求客户端与服务端的通讯必须基于一次请求一次响应
+且总是客户端先发起请求,服务端处理后进行响应.服务端不会主动
+发送响应给客户端.
+
+请求协议:
+HTTP规定了客户端发送给服务端的请求内容,该内容的格式必须
+符合HTTP的请求协议.
+
+HTTP请求的格式分为三部分组成:
+1:请求行
+2:请求头(消息头)
+3:请求正文(消息正文)
+格式如:
+GET /index.html HTTP/1.1(CRLF)
+Host: localhost:8088(CRLF)
+Connection: keep-alive(CRLF)
+Upgrade-Insecure-Requests: 1(CRLF)
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36(CRLF)
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8(CRLF)
+Accept-Encoding: gzip, deflate, br(CRLF)
+Accept-Language: zh-CN,zh;q=0.8(CRLF)(CRLF)
+
+请求行:
+请求行分为三部分,格式为:
+method url protocol(CRLF)
+分别表示请求的方法,请求的资源路径,以及客户端使用的HTTP协议版本
+请求方法常见为:GET,POST(HTTP协议规定了相关方法)
+请求行以CRLF作为结束
+CR:回车,对应的ASC编码为13
+LF:换行,对应的ASC编码为10
+如:
+GET /index.html HTTP/1.1(CRLF)
+
+消息头:
+消息头由若干行组成,每一行为一个具体的头信息.每个头信息
+以CRLF表示结束.
+头分为两部分:头名字与对应的值.
+格式为:name:value(CRLF)
+例如:
+Connection: keep-alive(CRLF)
+
+消息头的意义是在请求中附带的一些信息,比如告知服务端
+该请求所接收的响应的字符集,是否需要保持连接等.每个头
+的具体意义HTTP协议都有规定.
+当所有消息头全部发送后会单独发送一个(CRLF),所以最后一个
+消息头后面会有两个CRLF.第一个表示最后一个头信息结束,而第二
+个表示消息头部分发送完毕.
+
+消息正文:
+消息正文为2进制数据,是客户端需要发送给服务端的数据.
+具体表示什么含义,该部分总共多少字节都会在消息头中说明.
+比如我们上传的图片,提交的注册信息都是放在消息正文部分
+发送给服务端的.
+
+一个HTTP请求可以不包含消息正文部分.但是会包含请求行与消息头
