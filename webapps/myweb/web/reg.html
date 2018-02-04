@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>欢迎注册</title>
+	</head>
+	<body>
+		<div align="center">
+			<h1>用户注册</h1>
+			<!-- 
+				form标签:表单 
+				注册的过程可以理解为现实生活中我们去办某个业务
+				需要填写表格然后提交给业务员一样.
+				
+				而form表单就表示为填写的表格那张纸.
+				form表单中会有很多的输入框,每个输入框是要求
+				用户输入对应的信息.form表单中的action表示
+				这个表单提交到服务端的路径.让服务端处理该表单	
+				
+				action指定表单的提交地址,这里有两种地址形式:
+				绝对路径:
+					例如:action="http://localhost:8088/myweb/reg"
+				
+				相对路径
+					例如:action="reg"
+					相对路径中的当前路径就是浏览器地址栏中访问
+					当前页面的路径.
+					比如访问reg.html页面的地址为:
+					http://localhost:8088/myweb/reg.html
+					那么当前目录为:
+					http://localhost:8088/myweb
+					所以,action="reg"等同于
+					http://localhost:8088/myweb/reg
+			-->
+			<form action="reg" method="get">
+				<table border="1">
+					<tr>
+						<td>用户名:</td>
+						<td><input type="text" size="30" name="username"></td>
+					</tr>
+					<tr>
+						<td>密码:</td>
+						<td><input type="password" size="30" name="password"></td>
+					</tr>
+					<tr>
+						<td>手机:</td>
+						<td><input type="text" size="30" name="phone"></td>
+					</tr>
+					<tr>
+						<td>昵称:</td>
+						<td><input type="text" size="30" name="nickname"></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><input type="submit" value="注 册"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</body>
+</html>
+
+
