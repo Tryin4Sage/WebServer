@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 public class DateResult {
 	private static Connection conn;
 
-	/*
+	/**
 	 * 注册时用;
 	 * 检索数据库看有户名是否存在;
 	 */
@@ -30,7 +30,7 @@ public class DateResult {
 		return false;
 	}
 	
-	/*
+	/**
 	 * 检查用户名密码是否正确
 	 */
 	public static boolean ifTrue(String username,String password) {
@@ -52,7 +52,7 @@ public class DateResult {
 		return false;
 	}
 	
-	/*
+	/**
 	 * 将注册信息写入数据库
 	 */
 	public static boolean isinFoDate(String username,String password,String phone,String nikename) {

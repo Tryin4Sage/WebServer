@@ -1,7 +1,7 @@
 package com.tryin.vo;
 
-import java.sql.Connection;
-import java.sql.Statement;
+//import java.sql.Connection;
+//import java.sql.Statement;
 /**
  * 
  * @TODO用户注册信息表单对象
@@ -9,10 +9,10 @@ import java.sql.Statement;
  * @date 2018年2月4日下午9:50:40
  */
 public class CreateDate {
-	private static Connection conn;
+//	private static Connection conn;
 
 	public static void main(String[] args) {
-		try {
+/*		try {
 			conn = DBUtils.getConnection();
 			Statement sta = conn.createStatement();
 			String createSql = "create table userdate("
@@ -26,6 +26,6 @@ public class CreateDate {
 			e.printStackTrace();
 		} finally {
 			DBUtils.closeConnection(conn);
-		}
+		}*/
 	}
 }

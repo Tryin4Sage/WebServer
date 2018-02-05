@@ -50,20 +50,33 @@ public class DBUtils {
 			e.printStackTrace();
 		}
 	}
-	/*
+	/**
 	 * 获取数据库连接对象
 	 */
 	public static Connection getConnection() throws Exception {
 		Connection conn = bs.getConnection();
 		return conn;
 	}
-	/*
+	/**
 	 * 归还对象
 	 */
 	public static void closeConnection(Connection conn) {
 		try {
 			if (conn!=null) {
+				conn.commit();
 				conn.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 回滚
+	 */
+	public static void rollback(Connection conn) {
+		try {
+			if (conn!=null) {
+				conn.rollback();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

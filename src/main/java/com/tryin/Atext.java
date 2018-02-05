@@ -1,6 +1,5 @@
 package com.tryin;
 
-import com.tryin.vo.DateResult;
 /**
  * 专用测试类
  * @TODO

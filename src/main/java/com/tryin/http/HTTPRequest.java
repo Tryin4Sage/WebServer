@@ -12,10 +12,7 @@ import com.tryin.context.HttpContext;
  * @date 2018年2月3日下午5:06:54
  */
 public class HttpRequest {
-	/*
-	 * 读取客户端发送的数据输入流
-	 */
-	private InputStream in;
+	private InputStream in;	//读取客户端发送的数据输入流
 	private String method;	//请求方法
 	private String url;		//请求路径
 	private String protocol;//请求协议版本
@@ -33,6 +30,7 @@ public class HttpRequest {
 	public String getHeader(String name) {
 		return headers.get(name);
 	}
+	
 	public HttpRequest(InputStream in) throws EmptyRequestException {
 		System.out.println("开始解析工作");
 		this.in = in;
@@ -40,7 +38,7 @@ public class HttpRequest {
 		parseHeaders();
 		System.out.println("解析完毕");
 	}
-	/*
+	/**
 	 * 循环读取若干行,每一行是一个消息头
 	 */
 	private void parseHeaders() {
@@ -48,7 +46,6 @@ public class HttpRequest {
 		while (true) {
 			String line = readLine();
 			if("".equals(line)) {
-				System.out.println("111");
 				break;
 			}
 			int index = line.indexOf(":");
@@ -56,9 +53,13 @@ public class HttpRequest {
 			String value = line.substring(index+1).trim();
 			headers.put(name,value);
 		}
-		System.out.println("==========");
+		System.out.println("==========================");
 		
 	}
+	/**
+	 * 解析请求行数据
+	 * @throws EmptyRequestException
+	 */
 	private void parseRequestLine() throws EmptyRequestException{
 		String requestLine = readLine();
 		if(requestLine.length()==0) {
@@ -72,7 +73,7 @@ public class HttpRequest {
 		url = array[1];
 		protocol = array[2];
 	}
-	/*
+	/**
 	 * 读取一行请求数据 遇到(CRLF)结尾 
 	 */
 	private String readLine() {

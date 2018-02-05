@@ -35,7 +35,7 @@ public class HttpRsponse {
 	public void setContentLength(long length) {
 		this.headers.put(HttpContext.HEADER_CONTENT_TYPE, length+"");
 	}
-	/*
+	/**
 	 * 回复客户端
 	 */
 	public void flush() {
@@ -43,7 +43,7 @@ public class HttpRsponse {
 		sendHeaders();
 		sendContent();
 	}
-	/*
+	/**
 	 * 发送状态行
 	 */
 	private void sendStatusLine() {
@@ -56,7 +56,7 @@ public class HttpRsponse {
 		}
 		
 	}
-	/*
+	/**
 	 * 发送响应头
 	 */
 	private void sendHeaders() {
@@ -73,7 +73,7 @@ public class HttpRsponse {
 			System.err.println("发送响应头异常");
 		}
 	}
-	/*
+	/**
 	 * 发送响应正文
 	 */
 	private void sendContent() {
@@ -92,7 +92,10 @@ public class HttpRsponse {
 		}
 		
 	}
-	
+	/**
+	 * 发送尾巴
+	 * @param line
+	 */
 	private void println(String line) {
 		try {
 			out.write(line.getBytes("ISO8859-1"));
