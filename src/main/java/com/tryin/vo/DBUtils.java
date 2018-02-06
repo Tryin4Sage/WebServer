@@ -63,7 +63,7 @@ public class DBUtils {
 	public static void closeConnection(Connection conn) {
 		try {
 			if (conn!=null) {
-				conn.commit();
+				conn.setAutoCommit(true);
 				conn.close();
 			}
 		} catch (SQLException e) {

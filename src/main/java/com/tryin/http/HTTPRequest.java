@@ -1,10 +1,12 @@
 package com.tryin.http;
 
 import java.io.InputStream;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.tryin.context.HttpContext;
+import com.tryin.context.ServerContent;
 /**
  * 
  * @TODO 解析请求数据
@@ -16,8 +18,15 @@ public class HttpRequest {
 	private String method;	//请求方法
 	private String url;		//请求路径
 	private String protocol;//请求协议版本
+	
+	private String requestURI;//请求路径前面部分
+	private String queryString;//请求附带参数部分
+	//存储参数
+	private Map<String,String> parameters = new HashMap<String,String>();
+	
 	//消息头相关信息
 	private Map<String,String> headers = new HashMap<String,String>();
+	
 	public String getMethod() {
 		return method;
 	}
@@ -36,7 +45,50 @@ public class HttpRequest {
 		this.in = in;
 		parseRequestLine();
 		parseHeaders();
+		parseContent();
 		System.out.println("解析完毕");
+	}
+	/**
+	 * 解析消息正文
+	 */
+	private void parseContent() {
+		if (headers.containsKey(HttpContext.HEADER_CONTENT_LENGTH)) {
+			try {
+				System.out.println("解析消息正文");
+				/*
+				 * 判断是否为from表单对象数据
+				 */
+				String contentType = headers.get(HttpContext.HEADER_CONTENT_TYPE);
+				if ("application/x-www-form-urlencoded".equals(contentType)) {
+					System.out.println("处理表单数据中...");
+					int length = Integer.parseInt(headers.get(HttpContext.HEADER_CONTENT_LENGTH));
+					byte[] date = new byte[length];
+					in.read(date);
+					String line = new String(date);
+					parseQueryString(line);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	private void parseQueryString(String line) {
+		try {
+			line = URLDecoder.decode(line, ServerContent.URIEncoding);
+			String[] paraArray = line.split("&");
+			for (String string : paraArray) {
+				String[] arr = string.split("=");
+				if (arr.length==2) {
+					this.parameters.put(arr[0], arr[1]);
+				} else {
+					this.parameters.put(arr[0], "");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	/**
 	 * 循环读取若干行,每一行是一个消息头
@@ -72,6 +124,22 @@ public class HttpRequest {
 		method = array[0];
 		url = array[1];
 		protocol = array[2];
+		
+		parseUrl();
+	}
+	/**
+	 * 解析地址中部分
+	 */
+	private void parseUrl() {
+		int index = this.url.indexOf("?");//没有则返回-1;
+		if (index ==-1) {
+			this.requestURI = this.url;
+		} else {
+			this.requestURI = this.url.substring(0, index);
+			this.queryString = this.url.substring(index+1);
+			
+			parseQueryString(queryString);
+		}
 	}
 	/**
 	 * 读取一行请求数据 遇到(CRLF)结尾 
@@ -97,5 +165,13 @@ public class HttpRequest {
 		return "";
 	}
 	
-	
+	public String getRequestURI(){
+		return this.requestURI;
+	}
+	public String getQueryString(){
+		return this.queryString;
+	}
+	public String getParameter(String name){
+		return this.parameters.get(name);
+	}
 }

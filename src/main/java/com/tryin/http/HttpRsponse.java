@@ -18,8 +18,11 @@ import com.tryin.context.HttpContext;
 public class HttpRsponse {
 	private OutputStream out;
 	private File  entity;
+	private int Status_code;
 	//响应消息头
 	private Map<String,String> headers = new HashMap<String,String>();
+	
+	
 	public File getEntity() {
 		return entity;
 	}
@@ -35,6 +38,10 @@ public class HttpRsponse {
 	public void setContentLength(long length) {
 		this.headers.put(HttpContext.HEADER_CONTENT_TYPE, length+"");
 	}
+	public void setStatusCode(int code) {
+		this.Status_code = code;
+	}
+	
 	/**
 	 * 回复客户端
 	 */
@@ -90,7 +97,6 @@ public class HttpRsponse {
 		} catch (Exception e) {
 			System.err.println("发送响应正文异常");
 		}
-		
 	}
 	/**
 	 * 发送尾巴
@@ -105,5 +111,16 @@ public class HttpRsponse {
 			System.err.println("发送数据异常");
 		}
 	}
-	
+	/**
+	 * 重定向到指定页面
+	 * @param url
+	 */
+	public void sengRedirect(String url) {
+		//设置状态码为重定向
+		this.setStatusCode(HttpContext.STATUS_CODE_REIRECT);
+		//设置响应头
+		this.headers.put(HttpContext.HEADER_LOCALTION, url);
+		//响应客户端
+		this.flush();
+	}
 }
