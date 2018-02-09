@@ -55,11 +55,11 @@ public class DateResult {
 	/**
 	 * 将注册信息写入数据库
 	 */
-	public static boolean isinFoDate(String username,String password,String phone,String nikename) {
+	public static boolean isinFoDate(String username,String password,String phone,String nickname) {
 		try {
 			conn = DBUtils.getConnection();
 			String sql = "insert into userdate values(\'"
-					+username+"\',\'"+password+"\',\'"+phone+"\',\'"+nikename+"\')";
+					+username+"\',\'"+password+"\',\'"+phone+"\',\'"+nickname+"\')";
 			System.out.println(sql);
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.executeUpdate();

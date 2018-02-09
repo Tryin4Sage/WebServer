@@ -4,9 +4,11 @@ import java.io.File;
 import java.net.Socket;
 
 import com.tryin.context.HttpContext;
+import com.tryin.context.ServerContent;
 import com.tryin.http.EmptyRequestException;
 import com.tryin.http.HttpRequest;
 import com.tryin.http.HttpRsponse;
+import com.tryin.servelt.HttpServlet;
 
 /**
  * 
@@ -28,19 +30,31 @@ public class ClientHandle implements Runnable{
 			//创建响应对象
 			HttpRsponse response = new HttpRsponse(socket.getOutputStream());
 			
-			File file = new File("webapps"+request.getUrl());
-			System.err.println(file);
-			if (file.exists()) {
-				System.err.println("------------");
-				String name = file.getName();
-				String extension = name.substring(name.lastIndexOf(".")+1);
-				String contentType = HttpContext.getMimeType(extension);
+			String requestURI = request.getRequestURI();
+			String servletName = ServerContent.getServletNameByURI(requestURI);
+			if (servletName!=null) {
+				Class cls = Class.forName(servletName);
+				HttpServlet ser = (HttpServlet)cls.newInstance();
+				ser.service(request, response);
+			} else {
 				
-				response.setContentType(contentType);
-				response.setContentLength(file.length());
-				
-				response.setEntity(file);
-				response.flush();
+				File file = new File("webapps"+request.getUrl());
+				System.err.println(file);
+				if (file.exists()) {
+					System.err.println("------------");
+					String name = file.getName();
+					String extension = name.substring(name.lastIndexOf(".")+1);
+					String contentType = HttpContext.getMimeType(extension);
+					
+					response.setStatusCode(HttpContext.STATUS_CODE_OK);
+					response.setContentType(contentType);
+					response.setContentLength(file.length());
+					
+					response.setEntity(file);
+					response.flush();
+				}else {
+					System.out.println("文件不存在");
+				}
 			}
 		} catch (EmptyRequestException e) {
 			System.out.println(e.getMessage());
