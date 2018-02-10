@@ -33,7 +33,7 @@ public class ClientHandle implements Runnable{
 			String requestURI = request.getRequestURI();
 			String servletName = ServerContent.getServletNameByURI(requestURI);
 			if (servletName!=null) {
-				Class cls = Class.forName(servletName);
+				Class<?> cls = Class.forName(servletName);
 				HttpServlet ser = (HttpServlet)cls.newInstance();
 				ser.service(request, response);
 			} else {

@@ -1,4 +1,4 @@
-package com.tryin;
+package com.tryin.zzz;
 
 /**
  * 专用测试类

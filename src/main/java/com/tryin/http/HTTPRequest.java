@@ -85,6 +85,7 @@ public class HttpRequest {
 					this.parameters.put(arr[0], "");
 				}
 			}
+			System.out.println(parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

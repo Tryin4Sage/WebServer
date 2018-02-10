@@ -20,7 +20,7 @@ public class WebServer {
 	public WebServer() {
 		try {
 			server = new ServerSocket(9999);
-			System.out.println("服务器4.0已启动");
+			System.out.println("服务器5.0已启动");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
